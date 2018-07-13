@@ -1,0 +1,6 @@
+C:\Users\gea01\Documents\psgg\psgg-excel-win\PSGGExcelWin\psggExcelWinLib\bin\Debug\psggExcelWinLib.dll
+C:\Users\gea01\Documents\psgg\psgg-excel-win\PSGGExcelWin\psggExcelWinLib\bin\Debug\psggExcelWinLib.pdb
+C:\Users\gea01\Documents\psgg\psgg-excel-win\PSGGExcelWin\psggExcelWinLib\obj\Debug\psggExcelWinLib.csprojResolveAssemblyReference.cache
+C:\Users\gea01\Documents\psgg\psgg-excel-win\PSGGExcelWin\psggExcelWinLib\obj\Debug\psggExcelWinLib.csproj.ResolveComReference.cache
+C:\Users\gea01\Documents\psgg\psgg-excel-win\PSGGExcelWin\psggExcelWinLib\obj\Debug\psggExcelWinLib.dll
+C:\Users\gea01\Documents\psgg\psgg-excel-win\PSGGExcelWin\psggExcelWinLib\obj\Debug\psggExcelWinLib.pdb
