@@ -29,6 +29,8 @@ namespace psggExcelWinLib
 
         public bool Load(string filename)
         {
+            //System.Diagnostics.Debugger.Break();
+
             if (m_ew!=null) {
                 latest_error = "Unexpected! {3FB775C6-5A13-4AE7-B2CD-54CE5358C78E}";
                 throw new SystemException(latest_error);
@@ -99,27 +101,42 @@ namespace psggExcelWinLib
             }
             var range = sheet.UsedRange;
 
-            object[,] objs = (object[,])range.Value2;
-
             var row_start = range.Row;
             var row_len   = range.Rows.Count;
             var col_start = range.Column;
             var col_len   = range.Columns.Count;
 
             m_cell_list.Clear();
-            for(var r = 1; r<=row_len; r++)
+
+            if (row_len == 1 && col_len == 1)
             {
-                for(var c = 1; c<=col_len; c++)
+                var s = (range.Value2 != null) ? range.Value2.ToString() : null;
+
+                var cell = new Cell();
+                cell.row = row_start;
+                cell.col = col_start;
+                cell.text = s;
+
+                m_cell_list.Add(cell);
+            }
+            else
+            {
+                object[,] objs = (object[,])range.Value2;
+
+                for(var r = 1; r<=row_len; r++)
                 {
-                    var o = objs[r,c];
+                    for(var c = 1; c<=col_len; c++)
+                    {
+                        var o = objs[r,c];
 
-                    var cell = new Cell();
-                    cell.row = row_start + (r-1);
-                    cell.col = col_start + (c-1);
+                        var cell = new Cell();
+                        cell.row = row_start + (r-1);
+                        cell.col = col_start + (c-1);
                     
-                    cell.text = o!=null ? o.ToString() : null;
+                        cell.text = o!=null ? o.ToString() : null;
 
-                    m_cell_list.Add(cell);
+                        m_cell_list.Add(cell);
+                    }
                 }
             }
             Marshal.ReleaseComObject(range);
@@ -139,19 +156,35 @@ namespace psggExcelWinLib
             var max_row = 0;
             if (get_cell_list_max(out max_row, out max_col))
             {
-                var range = (Excel.Range)sheet.Range[sheet.Cells[1,1],sheet.Cells[max_row,max_col]];
+                if (max_row == 1 && max_col==1) //一個の場合
+                {
+                    var range = (Excel.Range)sheet.Cells[1,1];
 
-                object[,] objs = (object[,])range.Value2;
+                    range.NumberFormatLocal = "@"; //文字列
+                    foreach(var i in m_cell_list)
+                    {
+                        range.Value2 = i.text;
+                        break;
+                    }
+                    Marshal.ReleaseComObject(range);
+                    return true;
+                }
+                else
+                {
+                    var range = (Excel.Range)sheet.Range[sheet.Cells[1,1],sheet.Cells[max_row,max_col]];
+
+                    object[,] objs = (object[,])range.Value2;
                 
-                m_cell_list.ForEach(i=> {
-                    objs[i.row,i.col] = i.text;
-                });
+                    m_cell_list.ForEach(i=> {
+                        objs[i.row,i.col] = i.text;
+                    });
 
-                range.NumberFormatLocal = "@"; //文字列
-                range.Value2 = objs;
+                    range.NumberFormatLocal = "@"; //文字列
+                    range.Value2 = objs;
 
-                Marshal.ReleaseComObject(range);
-                return true;
+                    Marshal.ReleaseComObject(range);
+                    return true;
+                }
             }
             return false;
         }

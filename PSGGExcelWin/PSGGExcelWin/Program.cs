@@ -12,7 +12,7 @@ namespace PSGGExcelWin
     {
         static void Main(string[] args)
         {
-            TEST02(args);
+            TEST03(args);
 
         }
         static void TEST01(string[] args)
@@ -86,7 +86,17 @@ namespace PSGGExcelWin
         }
         static void TEST03(string[] args)
         {
-
+            var file =args[0];
+            var work = new Work();
+            if (work.Load(Path.GetFullPath(file)))
+            {
+                work.NewSheetForce("test");
+                work.SetStr(1,1,System.DateTime.Now.ToString());
+                work.WriteSheet();
+                work.Save();
+            }
+            Console.WriteLine(work.latest_error);
+            work.Dispose();
         }
 
     }

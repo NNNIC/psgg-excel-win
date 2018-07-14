@@ -68,7 +68,9 @@ public class ExcelWork
             var sheet = (Excel.Worksheet)m_workbook.Sheets[i];
             if (sheet.Name == name)
             {
+                sheet.Select();
                 m_worksheet = sheet;
+                
                 break;
             }
             Marshal.ReleaseComObject(sheet);
