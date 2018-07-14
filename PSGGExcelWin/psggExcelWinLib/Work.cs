@@ -175,7 +175,7 @@ namespace psggExcelWinLib
             return find!=null ? find.text : null;
         }
 
-        public void SetCell(int row, int col, string text)
+        public void SetStr(int row, int col, string text)
         {
             var find = m_cell_list.Find(i=>(i.row==row && i.col==col));
             if (find!=null)

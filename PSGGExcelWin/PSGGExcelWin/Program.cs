@@ -73,23 +73,22 @@ namespace PSGGExcelWin
                     }
                 }
                 
-                //if (!work.SetSheet("test"))
-                //{
-                //    work.NewSheet("test");
-                //}
                 work.NewSheetForce("test");
 
-                //cellist.ForEach(c=> {
-                //    work.SetCell(c.row,c.col,c.text);
-                //});
+                cellist.ForEach(c => {
+                    work.SetStr(c.row,c.col,c.text);
+                });
                 work.WriteSheet();
                 work.Save();
             }
             Console.WriteLine(work.latest_error);
             work.Dispose();
+        }
+        static void TEST03(string[] args)
+        {
 
         }
 
-
     }
 }
+

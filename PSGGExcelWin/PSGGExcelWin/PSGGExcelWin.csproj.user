@@ -2,6 +2,6 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartWorkingDirectory>C:\Users\gea01\Documents\psgg\psgg-excel-win\test\</StartWorkingDirectory>
-    <StartArguments>a.xlsx</StartArguments>
+    <StartArguments>2000_room.xlsm</StartArguments>
   </PropertyGroup>
 </Project>
