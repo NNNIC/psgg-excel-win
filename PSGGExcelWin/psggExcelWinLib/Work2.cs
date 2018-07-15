@@ -30,6 +30,8 @@ namespace psggExcelWinLib
 
         public void ReadPics()
         {
+            //System.Diagnostics.Debugger.Break();
+
             if (m_pic_list==null) m_pic_list = new List<Pic>();
             m_pic_list.Clear();
 
